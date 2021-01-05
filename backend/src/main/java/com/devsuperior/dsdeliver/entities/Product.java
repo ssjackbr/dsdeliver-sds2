@@ -6,8 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_product")
-public class Products implements Serializable {
-
+public class Product implements Serializable {
         private static final long serialVersionUID = 1L;
 
     @Id
@@ -18,10 +17,10 @@ public class Products implements Serializable {
     private String description;
     private String imageUri;
 
-    public Products() {
+    public Product() {
     }
 
-    public Products(Long id, String name, Double price, String description, String imageUri) {
+    public Product(Long id, String name, Double price, String description, String imageUri) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -73,7 +72,7 @@ public class Products implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Products products = (Products) o;
+        Product products = (Product) o;
         return Objects.equals(id, products.id);
     }
 
