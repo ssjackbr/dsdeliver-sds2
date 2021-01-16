@@ -1,9 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View,  } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Order } from '../types';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import "intl";
+import "intl/locale-data/jsonp/pt-BR.js";
+import { Platform } from "react-native";
+
+/** [intl_resolved]
+ * Parar a aplicação e digitar o seguinte comando no terminal:
+      npm install intl expo-localization 
+   Depois vai copiar e colar esses comandos no arquivo index.tsx da pasta OrderCard
+    import "intl";
+    import "intl/locale-data/jsonp/pt-BR.js";
+    import { Platform } from "react-native";
+
+    if (Platform.OS === "android") {
+      if (typeof (Intl as any).disableRegExpRestore === "function") {
+        (Intl as any).disableRegExpRestore();
+      }
+    }
+ */
+
+ //explicação sobre o trecho de código abaixo no bloco intl_resolved
+if (Platform.OS === "android") {
+    if (typeof (Intl as any).disableRegExpRestore === "function") {
+        (Intl as any).disableRegExpRestore();
+    }
+}
+
 
 dayjs.locale('pt-br');
 dayjs.extend(relativeTime);
@@ -16,7 +42,7 @@ export function dateFromNow(date: string){
   return dayjs(date).fromNow();
 }
 
-export function formatPrice (price: number){
+ function formatPrice (price: number){
   const formatter = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL',
